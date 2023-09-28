@@ -31,7 +31,7 @@ def read_csvs_in_folder(folder_path) -> DataFrame:
     return main_df
 
 
-states_data = read_csvs_in_folder(r"/Users/vinggio/pr/workers/MachineLearning/states_data")
+states_data = read_csvs_in_folder(r"/Users/vinggio/pr/workers/MachineLearning/test_ML/states_data_csvs")
 print(states_data.columns)
 
 
@@ -44,5 +44,5 @@ states_data.rename(columns={
     'violacion': "rapes",
     'otros_delitos': "other",
 }, inplace=True)
-states_data.to_csv("/test_ML/Files/crimes_by_state.csv", index=False)
+states_data.to_csv(r"/Users/vinggio/pr/workers/MachineLearning/test_ML/Files/crimes_by_state.csv", index=False)
 print(states_data.head())

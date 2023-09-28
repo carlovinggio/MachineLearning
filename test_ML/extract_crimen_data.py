@@ -29,13 +29,13 @@ converter = {
 }
 
 index_to_save = {
-    "1TOTAL DE ROBOS": "total_robos",
-    "2TOTAL DE LESIONES": "total_lesiones",
-    "3TOTAL DE HOMICIDIOS": "total_homicidios",
-    "4DELITOS PATRIMONIALES": "delitos_patrimoniales",
-    "5PRIV. DE LA LIBERTAD (SECUESTRO)": "secuestro",
-    "6DELITOS SEXUALES (VIOLACION)": "violacion",
-    "7OTROS DELITOS": "otros_delitos",
+    "total_robos": "total_robos",
+    "total_lesiones": "total_lesiones",
+    "total_homicidios": "total_homicidios",
+    "delitos_patrimoniales": "delitos_patrimoniales",
+    "secuestro": "secuestro",
+    "violacion": "violacion",
+    "otros_delitos": "otros_delitos",
 }
 dataframes = {state: pd.DataFrame({}) for state in states}
 ending_page = 33
