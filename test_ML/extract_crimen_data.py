@@ -1,8 +1,9 @@
 
-pdf_format = r"C:\Users\carlo\Downloads\{year}.pdf" # TODO. 
+pdf_format = r"C:\Users\carlo\Downloads\{year}.pdf"
 from tabula import read_pdf
 from tabulate import tabulate
 import pandas as pd
+import sys
 
 states = ["aguascalientes", "baja california", "baja california sur", "campeche", "chiapas", "chihuahua", "coahuila", "colima", "ciudad de mexico", "durango", "estado de mexico", "guanajuato", "guerrero", "hidalgo", "jalisco", "mexico", "michoacan", "morelos", "nayarit", "nuevo leon", "oaxaca"]
 states.extend(["puebla", "queretaro", "quintana roo", "san luis potosi", "sinaloa", "sonora", "tabasco", "tamaulipas", "tlaxcala", "veracruz", "yucatan", "zacatecas"])
@@ -38,12 +39,14 @@ index_to_save = {
 }
 dataframes = {state: pd.DataFrame({}) for state in states}
 ending_page = 33
-current_page = 3
 
 
 def remove_char(text, char=","):
     result = []
     i = 0
+    print("text:\n")
+    print(text)
+    text = str(text)
     while i < len(text):
         if text[i] == char:
             i += 2  # Skip the comma and the next character
@@ -55,6 +58,7 @@ def remove_char(text, char=","):
 
 for year in years:
     pdf_path = pdf_format.format(year=year)
+    current_page = 3
     for state in states:
         df = read_pdf(pdf_path, pages=str(current_page))[0]
         print("first")
@@ -77,6 +81,11 @@ for year in years:
         transposed.rename(index={"CONCEPTO": f"datetime"}, inplace=True)
 
         for column in transposed.columns:
+            print("####")
+            print(f"column: {column}")
+            print("####")
+            print(f"column trnasposed: {transposed[column]}")
+            print("####")
             transposed[column] = transposed[column].apply(remove_char)
 
         for i in transposed.index:
@@ -94,10 +103,9 @@ for year in years:
         # add to state dataframe
         print(dataframes[state])
         if year == 2016:
-            dataframes[state].to_csv(f"{state}.csv", index=True, header=False, sep=";")
+            dataframes[state].to_csv(f"states_data/{state}.csv", index=True, header=False, sep=";")
 
-    current_page += 1
-
+        current_page += 1
 
 
 """
